@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %} BlogHome {% endblock title %}
+{% block blogactive %} active {% endblock blogactive %} 
+
+
+{% block body %}
+<div class="container my-3">
+    <marquee behavior = "alternate" scrollamount = "10" style = "border-radius: 10px;" bgcolor = "lightgreen"><h1 class="display-4">Coding Articles by SunCoder !</h1></marquee>
+    {% for post in allPosts  %}
+    <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 my-4 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+            <strong class="d-inline-block mb-2 text-primary">Article  by {{post.author}}</strong>
+            <h3 class="mb-0">{{post.title}}</h3>
+            <div class="mb-1 text-muted">{{post.datetime}}</div>
+            <p class="card-text mb-auto">{{post.content| truncatechars:500}}</p>
+            <div class="my-2">
+            	<a href="/blog/{{post.slug}}" role="button" class="btn btn-primary">Continue reading</a>
+            </div>
+            
+        </div>
+        </div>
+
+        {% endfor %}
+    </div>
+
+    <div class="container my-3">
+        <h3>Add Post to SunCoder Admin</h3>
+        <form action="blog/addPost" method="post">
+        {% csrf_token %}
+        
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input type="title" class="form-control" id="title" name="title" aria-describedby="titleHelp">
+          </div>
+        
+          <div class="form-group">
+            <label for="author">Author</label>
+            <input type="author" class="form-control" id="author" name="author">
+          </div>
+        
+          <div class="form-group">
+            <label for="slug">Slug</label>
+            <textarea class="form-control" name="slug" id="slug" cols="30" rows="5"></textarea>
+          </div>
+    
+          <div class="form-group">
+            <label for="content">Content</label>
+            <textarea class="form-control" name="content" id="content" cols="30" rows="5"></textarea>
+          </div>
+        
+        
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        </div>
+
+ {% endblock body %}

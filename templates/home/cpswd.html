@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %} Change Password {% endblock title %}
+{%block loginactive%} active {%endblock loginactive%}
+{% block body %}
+<center>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <marquee behavior = "alternate" scrollamount = "10"><strong>Welcome to SunCoder !</strong>This is a page for change password.</marquee>
+    
+  </div>
+  {% if user.is_authenticated %}
+  <form action="/ChangePswd" method="post">
+    {% csrf_token %}
+    <div class="container" style="width: 500px; margin: auto; border: 3px solid #ADD8E6;">
+    <br><input type="password" name="oldpswd" id="oldpswd" class="form-control" placeholder="Enter your current password"><br><br>
+    <input type="password" name="newpswd" id="newpswd" class="form-control" placeholder="Enter your new password"><br><br>
+    <button class="btn btn-outline-info">Submit</button><br><br>
+    </div>
+    {% else %}
+    {% endif %}
+</form>
+</center>
+{% endblock body %}
